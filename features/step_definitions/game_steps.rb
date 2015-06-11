@@ -5,3 +5,7 @@ end
 Then /^the game shows the message:$/ do |text|
   assert_partial_output(text, all_output)
 end
+
+And /^chooses a hand shape$/ do
+  set_shape
+end

@@ -11,3 +11,4 @@ Feature: Start Game
     """
     Welcome to the Rock, Paper, Scissors, Lizard, Spock Game!
     """
+    And chooses a hand shape
