@@ -1,8 +1,7 @@
 When /^I start a new game$/ do
-  game = Game.new
-  game.start
+  run_interactive("lizard-spock")
 end
 
 Then /^the game shows the message:$/ do |text|
-  pending
+  assert_partial_output(text, all_output)
 end
