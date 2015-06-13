@@ -8,4 +8,5 @@ end
 
 And /^chooses a hand shape$/ do
   set_shape
+  expect(@shape).to_not be_nil
 end

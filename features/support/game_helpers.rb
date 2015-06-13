@@ -1,6 +1,8 @@
 module GameHelpers
   def set_shape
-    @shape = Game.new.shape
+    game = Game.new
+    game.start
+    @shape = game.shape
   end
 end
 
