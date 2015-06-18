@@ -2,11 +2,12 @@ Feature: Player chooses shape
   After starting the game, the player chooses a hand shape for playing.
 
   @wip
-  Scenario:
-    Given the game has chosen <game_shape>
-    When I choose <player_shape>
-    Then I should <result> the game
+  Scenario Outline: Game matchup
+    Given the game has chosen "<game_shape>"
+    When I choose "<player_shape>"
+    Then I should "<result>" the game
 
+    Scenarios:
     | game_shape | player_shape | result |
     | rock       | rock         | draw   |
     | rock       | paper        | win    |
