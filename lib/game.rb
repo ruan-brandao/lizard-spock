@@ -9,7 +9,11 @@ class Game
   def start
     initial_message = "Welcome to the Rock, Paper, Scissors, Lizard, Spock Game!"
     @output.puts initial_message
+    
     choose_shape
+
+    prompt = "Choose rock, paper, scissors, lizard or spock"
+    @output.puts prompt
   end
 
   def choose_shape

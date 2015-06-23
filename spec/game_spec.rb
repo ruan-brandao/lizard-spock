@@ -19,6 +19,13 @@ describe Game do
 
       game.start
     end
+
+    it "prompts the user for choosing a hand shape" do
+      prompt = "Choose rock, paper, scissors, lizard or spock"
+      expect(output).to receive(:puts).with(prompt)
+
+      game.start
+    end
   end
 
   describe "#choose_shape" do
