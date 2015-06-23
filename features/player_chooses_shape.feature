@@ -2,6 +2,13 @@ Feature: Player chooses shape
   After starting the game, the player chooses a hand shape for playing.
 
   @wip
+  Scenario: Prompt to choose shape
+    Given the game is started
+    Then the game shows the message:
+    """
+    Choose rock, paper, scissors, lizard or spock
+    """
+
   Scenario Outline: Game matchup
     Given the game has chosen "<game_shape>"
     When I choose "<player_shape>"

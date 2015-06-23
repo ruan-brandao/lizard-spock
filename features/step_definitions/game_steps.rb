@@ -1,7 +1,5 @@
 When /^I start a new game$/ do
-  run_interactive("lizard-spock")
-  @game = Game.new
-  @game.start
+  start_game
 end
 
 Then /^the game shows the message:$/ do |text|
@@ -10,6 +8,10 @@ end
 
 And /^chooses a hand shape$/ do
   expect(@game.shape).to_not be_nil
+end
+
+Given /^the game is started$/ do
+  start_game
 end
 
 Given /^the game has chosen "([^"]*)"$/ do |game_shape|
