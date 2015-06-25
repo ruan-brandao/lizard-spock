@@ -14,6 +14,10 @@ Given /^the game is started$/ do
   start_game
 end
 
+And /^I finish the game$/ do
+  type("fim")
+end
+
 Given /^the game has chosen "([^"]*)"$/ do |game_shape|
   @game.shape = game_shape
 end

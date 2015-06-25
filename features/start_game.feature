@@ -8,6 +8,7 @@ Feature: Start Game
     shape when it is started.
 
     When I start a new game
+    And I finish the game
     Then the game shows the message:
     """
     Welcome to the Rock, Paper, Scissors, Lizard, Spock Game!
