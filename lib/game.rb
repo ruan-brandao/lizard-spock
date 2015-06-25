@@ -1,6 +1,6 @@
 class Game
   SHAPES = [:rock, :paper, :scissors, :lizard, :spock]
-  attr_reader :shape, :status
+  attr_reader :shape, :player_shape, :status
 
   def initialize(ui = CliUi.new)
     @ui = ui
@@ -18,5 +18,21 @@ class Game
   def choose_shape
     index = Kernel.rand(5)
     @shape = SHAPES[index]
+  end
+
+  def next_step
+    if @player_shape.nil?
+      prompt = "Choose rock, paper, scissors, lizard or spock"
+      @ui.write prompt
+    end
+
+    player_input = @ui.read
+    case player_input
+    when "fim" then finish
+    end
+  end
+
+  def finish
+    @status = :finished
   end
 end

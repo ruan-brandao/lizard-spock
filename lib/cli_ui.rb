@@ -4,7 +4,7 @@ class CliUi
   end
 
   def read
-    user_input = gets
+    user_input = gets.chomp
     user_input
   end
 end

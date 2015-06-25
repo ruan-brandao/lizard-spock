@@ -50,4 +50,25 @@ describe Game do
       expect(game.shape).to eq(Game::SHAPES[3])
     end
   end
+
+  describe "#next_step" do
+    it "prompts the player if the player shape is not defined" do
+      allow(game).to receive(:player_shape).and_return(nil)
+      prompt = "Choose rock, paper, scissors, lizard or spock"
+
+      expect(ui).to receive(:write).with(prompt)
+
+      game.next_step
+    end
+
+    it "finishes the game if the player asks to" do
+      allow(ui).to receive(:read).and_return("fim")
+
+      expect(game).to receive(:finish)
+
+      game.next_step
+    end
+
+    it "sets the player if the player asks to"
+  end
 end

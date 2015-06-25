@@ -3,6 +3,7 @@
 $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
 
 require "game"
+require "cli_ui"
 
 game = Game.new
 game.start
