@@ -1,19 +1,18 @@
 class Game
   SHAPES = [:rock, :paper, :scissors, :lizard, :spock]
-  attr_reader :shape
+  attr_reader :shape, :status
 
-  def initialize(output = STDOUT)
-    @output = output
+  def initialize(ui = CliUi.new)
+    @ui = ui
   end
 
   def start
     initial_message = "Welcome to the Rock, Paper, Scissors, Lizard, Spock Game!"
-    @output.puts initial_message
-    
-    choose_shape
+    @ui.write initial_message
 
-    prompt = "Choose rock, paper, scissors, lizard or spock"
-    @output.puts prompt
+    @status = :started
+
+    choose_shape
   end
 
   def choose_shape

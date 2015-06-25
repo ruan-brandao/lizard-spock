@@ -6,3 +6,7 @@ require "game"
 
 game = Game.new
 game.start
+
+while game.status != :finished
+  game.next_step
+end

@@ -2,27 +2,26 @@ require "spec_helper"
 require "game"
 
 describe Game do
-  let(:output) { double("output").as_null_object }
+  let(:ui) { double("ui").as_null_object }
 
-  subject(:game) { Game.new(output) }
+  subject(:game) { Game.new(ui) }
 
   describe "#start" do
     it "prints the initial message" do
       initial_message = "Welcome to the Rock, Paper, Scissors, Lizard, Spock Game!"
-      expect(output).to receive(:puts).with(initial_message)
+      expect(ui).to receive(:write).with(initial_message)
 
       game.start
+    end
+
+    it "sets the game status as :started" do
+      game.start
+
+      expect(game.status).to eq(:started)
     end
 
     it "chooses a hand shape" do
       expect(game).to receive(:choose_shape)
-
-      game.start
-    end
-
-    it "prompts the user for choosing a hand shape" do
-      prompt = "Choose rock, paper, scissors, lizard or spock"
-      expect(output).to receive(:puts).with(prompt)
 
       game.start
     end
