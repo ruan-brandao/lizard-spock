@@ -61,14 +61,68 @@ describe Game do
       game.next_step
     end
 
-    it "finishes the game if the player asks to" do
-      allow(ui).to receive(:read).and_return("fim")
+    context "the player types 'end'" do
+      before { allow(ui).to receive(:read).and_return("end") }
 
+      it "shows the goodbye message" do
+        goodbye_message = "Bye bye!"
+
+        expect(ui).to receive(:write).with(goodbye_message)
+
+        game.next_step
+      end
+
+      it "finishes the game" do
       expect(game).to receive(:finish)
 
       game.next_step
+      end
     end
 
-    it "sets the player if the player asks to"
+    context "the player chooses a valid shape" do
+      before do
+        index = rand(5)
+        @player_input = Game::SHAPES[index].to_s
+        allow(ui).to receive(:read).and_return(@player_input)
+      end
+
+      it "sets the player shape chosen by the player" do
+        game.next_step
+
+        expect(game.player_shape).to eq(@player_input.to_sym)
+      end
+
+      it "executes the game matchup" do
+        expect(game).to receive(:matchup)
+
+        game.next_step
+      end
+    end
+
+    context "the player types an invalid word" do
+      before { allow(ui).to receive(:read).and_return("abcde") }
+
+      it "shows an error message" do
+        error_message = "I didn't understand that. Choose again."
+
+        expect(ui).to receive(:write).with(error_message)
+
+        game.next_step
+      end
+
+      it "prompts the user again" do
+        expect(game).to receive(:next_step).and_return(nil)
+
+        game.next_step
+      end
+    end
+  end
+
+  describe "#finish" do
+    it "sets the game status as :finished" do
+      game.finish
+
+      expect(game.status).to eq(:finished)
+    end
   end
 end

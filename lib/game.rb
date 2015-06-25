@@ -26,10 +26,23 @@ class Game
       @ui.write prompt
     end
 
-    player_input = @ui.read
+    player_input = @ui.read.downcase
     case player_input
-    when "fim" then finish
+    when "end"
+      goodbye_message = "Bye bye!"
+      @ui.write(goodbye_message)
+      finish
+    when /rock|paper|scissors|lizard|spock/
+      @player_shape = player_input.to_sym
+      matchup
+    else
+      error_message = "I didn't understand that. Choose again."
+      @ui.write error_message
+      nil
     end
+  end
+
+  def matchup
   end
 
   def finish
