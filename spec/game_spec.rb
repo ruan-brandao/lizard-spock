@@ -335,4 +335,44 @@ describe Game do
       end
     end
   end
+
+  describe "#show_result" do
+    it "shows the shape chosen by the game" do
+      allow(game).to receive(:shape).and_return(Game::SHAPES[rand(5)])
+      message = "The game chose #{game.shape}"
+
+      expect(ui).to receive(:write).with(message)
+
+      game.show_result
+    end
+
+    context "shows the result of the game" do
+      it "when the game draws" do
+        allow(game).to receive(:result).and_return(:draw)
+        message = "It's a draw"
+
+        expect(ui).to receive(:write).with(message)
+
+        game.show_result
+      end
+
+      it "when the player wins" do
+        allow(game).to receive(:result).and_return(:player_wins)
+        message = "You win"
+
+        expect(ui).to receive(:write).with(message)
+
+        game.show_result
+      end
+
+      it "when the player loses" do
+        allow(game).to receive(:result).and_return(:game_wins)
+        message = "You lose"
+
+        expect(ui).to receive(:write).with(message)
+
+        game.show_result
+      end
+    end
+  end
 end

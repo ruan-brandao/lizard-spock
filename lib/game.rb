@@ -64,6 +64,16 @@ class Game
   end
 
   def show_result
+    @ui.write "The game chose #{self.shape}"
+
+    case self.result
+    when :draw
+      @ui.write "It's a draw"
+    when :game_wins
+      @ui.write "You lose"
+    when :player_wins
+      @ui.write "You win"
+    end
   end
 
   def finish
