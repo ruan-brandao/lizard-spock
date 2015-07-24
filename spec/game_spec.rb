@@ -97,6 +97,12 @@ describe Game do
 
         game.next_step
       end
+
+      it "shows the result" do
+        expect(game).to receive(:show_result)
+
+        game.next_step
+      end
     end
 
     context "the player types an invalid word" do
@@ -123,6 +129,210 @@ describe Game do
       game.finish
 
       expect(game.status).to eq(:finished)
+    end
+  end
+
+  describe "#matchup" do
+    describe "calculates the result of the game" do
+      it "draws the game when the player shape is equal to the game shape" do
+        index = rand(5)
+        allow(game).to receive(:shape).and_return(Game::SHAPES[index])
+        allow(game).to receive(:player_shape).and_return(Game::SHAPES[index])
+
+        game.matchup
+
+        expect(game.result).to eq(:draw)
+      end
+
+      context "player chooses rock" do
+        before do
+          allow(game).to receive(:player_shape).and_return(:rock)
+        end
+
+        it "sets result as :player_wins if the game chooses scissors" do
+          allow(game).to receive(:shape).and_return(:scissors)
+
+          game.matchup
+
+          expect(game.result).to eq(:player_wins)
+        end
+
+        it "sets result as :player_wins if the game chooses lizard" do
+          allow(game).to receive(:shape).and_return(:lizard)
+
+          game.matchup
+
+          expect(game.result).to eq(:player_wins)
+        end
+
+        it "sets result as :game_wins if the game chooses paper" do
+          allow(game).to receive(:shape).and_return(:paper)
+
+          game.matchup
+
+          expect(game.result).to eq(:game_wins)
+        end
+
+        it "sets result as :game_wins if the game chooses spock" do
+          allow(game).to receive(:shape).and_return(:spock)
+
+          game.matchup
+
+          expect(game.result).to eq(:game_wins)
+        end
+      end
+
+      context "player chooses paper" do
+        before do
+          allow(game).to receive(:player_shape).and_return(:paper)
+        end
+
+        it "sets result as :player_wins if the game chooses rock" do
+          allow(game).to receive(:shape).and_return(:rock)
+
+          game.matchup
+
+          expect(game.result).to eq(:player_wins)
+        end
+
+        it "sets result as :player_wins if the game chooses spock" do
+          allow(game).to receive(:shape).and_return(:spock)
+
+          game.matchup
+
+          expect(game.result).to eq(:player_wins)
+        end
+
+        it "sets result as :game_wins if the game chooses scissors" do
+          allow(game).to receive(:shape).and_return(:scissors)
+
+          game.matchup
+
+          expect(game.result).to eq(:game_wins)
+        end
+
+        it "sets result as :game_wins if the game chooses lizard" do
+          allow(game).to receive(:shape).and_return(:lizard)
+
+          game.matchup
+
+          expect(game.result).to eq(:game_wins)
+        end
+      end
+
+      context "player chooses scissors" do
+        before do
+          allow(game).to receive(:player_shape).and_return(:scissors)
+        end
+
+        it "sets result as :player_wins if the game chooses paper" do
+          allow(game).to receive(:shape).and_return(:paper)
+
+          game.matchup
+
+          expect(game.result).to eq(:player_wins)
+        end
+
+        it "sets result as :player_wins if the game chooses lizard" do
+          allow(game).to receive(:shape).and_return(:lizard)
+
+          game.matchup
+
+          expect(game.result).to eq(:player_wins)
+        end
+
+        it "sets result as :game_wins if the game chooses rock" do
+          allow(game).to receive(:shape).and_return(:rock)
+
+          game.matchup
+
+          expect(game.result).to eq(:game_wins)
+        end
+
+        it "sets result as :game_wins if the game chooses spock" do
+          allow(game).to receive(:shape).and_return(:spock)
+
+          game.matchup
+
+          expect(game.result).to eq(:game_wins)
+        end
+      end
+
+      context "player chooses lizard" do
+        before do
+          allow(game).to receive(:player_shape).and_return(:lizard)
+        end
+
+        it "sets result as :player_wins if the game chooses paper" do
+          allow(game).to receive(:shape).and_return(:paper)
+
+          game.matchup
+
+          expect(game.result).to eq(:player_wins)
+        end
+
+        it "sets result as :player_wins if the game chooses spock" do
+          allow(game).to receive(:shape).and_return(:spock)
+
+          game.matchup
+
+          expect(game.result).to eq(:player_wins)
+        end
+
+        it "sets result as :game_wins if the game chooses rock" do
+          allow(game).to receive(:shape).and_return(:rock)
+
+          game.matchup
+
+          expect(game.result).to eq(:game_wins)
+        end
+
+        it "sets result as :game_wins if the game chooses scissors" do
+          allow(game).to receive(:shape).and_return(:scissors)
+
+          game.matchup
+
+          expect(game.result).to eq(:game_wins)
+        end
+      end
+
+      context "player chooses spock" do
+        before do
+          allow(game).to receive(:player_shape).and_return(:spock)
+        end
+
+        it "sets result as :player_wins if the game chooses rock" do
+          allow(game).to receive(:shape).and_return(:rock)
+
+          game.matchup
+
+          expect(game.result).to eq(:player_wins)
+        end
+
+        it "sets result as :player_wins if the game chooses scissors" do
+          allow(game).to receive(:shape).and_return(:scissors)
+
+          game.matchup
+
+          expect(game.result).to eq(:player_wins)
+        end
+
+        it "sets result as :game_wins if the game chooses paper" do
+          allow(game).to receive(:shape).and_return(:paper)
+
+          game.matchup
+
+          expect(game.result).to eq(:game_wins)
+        end
+
+        it "sets result as :game_wins if the game chooses lizard" do
+          allow(game).to receive(:shape).and_return(:lizard)
+
+          game.matchup
+
+          expect(game.result).to eq(:game_wins)
+        end
+      end
     end
   end
 end
